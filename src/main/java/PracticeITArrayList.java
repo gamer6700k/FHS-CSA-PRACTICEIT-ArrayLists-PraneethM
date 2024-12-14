@@ -12,40 +12,74 @@ public class PracticeITArrayList {
      * {"four", "score", "and", "seven", "years", "ago"} your method should switch the pairs to yield:
      * {"score", "four", "seven", "and", "ago", "years"}
      */
-    public static void swapPairs(ArrayList<String> list) {
-
+    public static void swapPairs(ArrayList<String> stringList) {
+        for (int lcv = 0; lcv < stringList.size() - 1; lcv += 2) {
+            String temp = stringList.get(lcv);
+            stringList.set(lcv, stringList.get(lcv + 1));
+            stringList.set(lcv + 1, temp);
+        }
     }
 
     /**
      * Write a method removeEvenLength that takes an ArrayList of Strings as a parameter and that removes
      * all of the strings of even length from the list.
      */
-    public static void removeEvenLength(ArrayList<String> list) {
-
+    public static void removeEvenLength(ArrayList<String> stringList) {
+        for (int lcv = 0; lcv < stringList.size(); lcv++) {
+            String currentString = stringList.get(lcv);
+            if (currentString.length() % 2 == 0) {
+                stringList.remove(lcv);
+                lcv--; // Adjust index after removal
+            }
+        }
     }
 
     /**
      * Write a method doubleList that takes an ArrayList of Strings as a parameter and that replaces
      * every string with two of that string.
      */
-    public static void doubleList(ArrayList<String> list) {
-
+    public static void doubleList(ArrayList<String> stringList) {
+        for (int lcv = 0; lcv < stringList.size(); lcv++) {
+            String currentString = stringList.get(lcv);
+            stringList.add(lcv + 1, currentString);
+            lcv++; // Adjust index after insertion
+        }
     }
 
     /**
      * Write a method minToFront that takes an ArrayList of integers as a parameter and that moves the 
-     * minimum value in the list to the front, otherwise preserving the order of the elements.
-     */
-    public static void minToFront(ArrayList<Integer> list) {
+     * minimum value in the list to the front , otherwise preserving the order of the elements.
+     */ 
+    public static void minToFront(ArrayList<Integer> intList) {
+        if (intList.isEmpty()) {
+            return; // Handle empty list
+        }
 
+        int minValue = intList.get(0);
+        int minIndex = 0;
+        for (int lcv = 1; lcv < intList.size(); lcv++) {
+            if (intList.get(lcv) < minValue) {
+                minValue = intList.get(lcv);
+                minIndex = lcv;
+            }
+        }
+        intList.remove(minIndex);
+        intList.add(0, minValue);
     }
+
+
 
     /**
      * Write a method removeDuplicates that takes as a parameter a sorted ArrayList of Strings and that
      * eliminates any duplicates from the list.
      */
-    public static void removeDuplicates(ArrayList<String> list) {
-
+    public static void removeDuplicates(ArrayList<String> stringList) {
+        for (int lcv = 0; lcv < stringList.size() - 1; lcv++) {
+            if (stringList.get(lcv).equals(stringList.get(lcv + 1))) {
+                stringList.remove(lcv + 1);
+                lcv--; // Adjust index after removal
+            }
+        }
     }
 
     /**
@@ -54,16 +88,28 @@ public class PracticeITArrayList {
      * The method's behavior is to remove all occurrences of the given element that appear
      * in the list between the starting index (inclusive) and the ending index (exclusive).
      */
-    public static void removeInRange(ArrayList<Integer> list, int element, int start, int end) {
-
+    public static void removeInRange(ArrayList<Integer> intList, int element, int start, int end) {
+        for (int lcv = start; lcv < end && lcv < intList.size(); lcv++) {
+            if (intList.get(lcv) == element) {
+                intList.remove(lcv);
+                lcv--; // Adjust index after removal
+                end--; // Adjust end index after removal
+            }
+        }
     }
 
     /**
      * Write a method stutter that takes an ArrayList of Strings and an integer k as parameters
      * and that replaces every string with k copies of that string.
      */
-    public static void stutter(ArrayList<String> list, int k) {
-
+    public static void stutter(ArrayList<String> stringList, int k) {
+        for (int lcv = 0; lcv < stringList.size(); lcv++) {
+            String currentString = stringList.get(lcv);
+            for (int repetitions = 1; repetitions < k; repetitions++) {
+                stringList.add(lcv + 1, currentString);
+                lcv++; // Adjust index after insertion
+            }
+        }
     }
 
     /**
@@ -79,9 +125,20 @@ public class PracticeITArrayList {
      * If there is a tie (both strings have the same length), your method should remove the first string in the pair.
      * If there is an odd number of strings in the list, the final value should be kept in the list.
      */
-    public static void removeShorterStrings(ArrayList<String> list) {
+    public static void removeShorterStrings(ArrayList<String> stringList) {
+        for (int lcv = 0; lcv < stringList.size() - 1; lcv +=2) { // corrected the increment to skip correctly
+           if (stringList.get(lcv).length() <= stringList.get(lcv + 1).length()) {
+                stringList.remove(lcv);
+           
+            } else {
+                stringList.remove(lcv + 1);
+            }
+           lcv--; // added this line since after remove operation the index needs correction 
 
+        }
     }
+
+
 
     /**
      * Write a method called interleave that accepts two ArrayLists of integers a1 and a2 as parameters and 
@@ -91,9 +148,17 @@ public class PracticeITArrayList {
      * should change a1 to store [10, 4, 20, 5, 30, 6, 7, 8]. 
      * If a1 had stored [10, 20, 30, 40, 50] and a2 had stored [6, 7, 8], the call of interleave(a1, a2); 
      * would change a1 to store [10, 6, 20, 7, 30, 8, 40, 50].
-     */    
-    public static void interleave(ArrayList<Integer> a1, ArrayList<Integer> a2) {
-
+     */ 
+    public static void interleave(ArrayList<Integer> list1, ArrayList<Integer> list2) {
+        int index1 = 0;
+        for (int lcv = 0; lcv < list2.size(); lcv++) {
+            if (index1 < list1.size()) {
+                list1.add(index1, list2.get(lcv));
+                index1 += 2;
+            } else {
+                list1.add(list2.get(lcv));
+            }
+            
+        }
     }
-
 }
