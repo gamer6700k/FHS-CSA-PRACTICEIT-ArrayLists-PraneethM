@@ -29,7 +29,7 @@ public class PracticeITArrayList {
             String currentString = stringList.get(lcv);
             if (currentString.length() % 2 == 0) {
                 stringList.remove(lcv);
-                lcv--; // Adjust index after removal
+                lcv--; 
             }
         }
     }
@@ -42,7 +42,7 @@ public class PracticeITArrayList {
         for (int lcv = 0; lcv < stringList.size(); lcv++) {
             String currentString = stringList.get(lcv);
             stringList.add(lcv + 1, currentString);
-            lcv++; // Adjust index after insertion
+            lcv++; 
         }
     }
 
@@ -52,7 +52,7 @@ public class PracticeITArrayList {
      */ 
     public static void minToFront(ArrayList<Integer> intList) {
         if (intList.isEmpty()) {
-            return; // Handle empty list
+            return; 
         }
 
         int minValue = intList.get(0);
@@ -77,7 +77,7 @@ public class PracticeITArrayList {
         for (int lcv = 0; lcv < stringList.size() - 1; lcv++) {
             if (stringList.get(lcv).equals(stringList.get(lcv + 1))) {
                 stringList.remove(lcv + 1);
-                lcv--; // Adjust index after removal
+                lcv--; 
             }
         }
     }
@@ -92,8 +92,8 @@ public class PracticeITArrayList {
         for (int lcv = start; lcv < end && lcv < intList.size(); lcv++) {
             if (intList.get(lcv) == element) {
                 intList.remove(lcv);
-                lcv--; // Adjust index after removal
-                end--; // Adjust end index after removal
+                lcv--; 
+                end--; 
             }
         }
     }
@@ -107,7 +107,7 @@ public class PracticeITArrayList {
             String currentString = stringList.get(lcv);
             for (int repetitions = 1; repetitions < k; repetitions++) {
                 stringList.add(lcv + 1, currentString);
-                lcv++; // Adjust index after insertion
+                lcv++; 
             }
         }
     }
@@ -125,6 +125,7 @@ public class PracticeITArrayList {
      * If there is a tie (both strings have the same length), your method should remove the first string in the pair.
      * If there is an odd number of strings in the list, the final value should be kept in the list.
      */
+    // fix this one later, failing 7 tests
     public static void removeShorterStrings(ArrayList<String> stringList) {
         for (int lcv = 0; lcv < stringList.size() - 1; lcv +=2) { // corrected the increment to skip correctly
            if (stringList.get(lcv).length() <= stringList.get(lcv + 1).length()) {
@@ -133,7 +134,7 @@ public class PracticeITArrayList {
             } else {
                 stringList.remove(lcv + 1);
             }
-           lcv--; // added this line since after remove operation the index needs correction 
+           lcv--; 
 
         }
     }
