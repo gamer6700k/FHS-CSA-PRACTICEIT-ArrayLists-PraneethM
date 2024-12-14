@@ -1,4 +1,4 @@
-package src.main.java;
+package main.java;
 import java.util.ArrayList;
 
 public class PracticeITArrayList {
@@ -103,16 +103,24 @@ public class PracticeITArrayList {
      * and that replaces every string with k copies of that string.
      */
     public static void stutter(ArrayList<String> stringList, int k) {
-        for (int lcv = 0; lcv < stringList.size(); lcv++) {
-            String currentString = stringList.get(lcv);
-            for (int repetitions = 1; repetitions < k; repetitions++) {
-                stringList.add(lcv + 1, currentString);
-                lcv++; 
+        if (k <= 0) { 
+            stringList.clear();
+            return;
+        }
+
+        int originalSize = stringList.size();
+        for (int lcv = 0; lcv < originalSize; ++lcv) {
+            String item = stringList.get(lcv * k); 
+            for (int j = 1; j < k; ++j) {
+                stringList.add(lcv * k + j, item); 
             }
         }
+        
+
+
     }
 
-    /**
+     /**
      * Write a method removeShorterStrings that takes an ArrayList of Strings as a parameter 
      * and that removes from each successive pair of values the shorter string in the pair.  
      * For example, suppose that an ArrayList called list contains the following values:
@@ -127,14 +135,17 @@ public class PracticeITArrayList {
      */
     // fix this one later, failing 7 tests
     public static void removeShorterStrings(ArrayList<String> stringList) {
-        for (int lcv = 0; lcv < stringList.size() - 1; lcv +=2) { // corrected the increment to skip correctly
-           if (stringList.get(lcv).length() <= stringList.get(lcv + 1).length()) {
+        for (int lcv = 0; lcv < stringList.size() - 1; lcv += 2) {
+            String str1 = stringList.get(lcv);
+            String str2 = stringList.get(lcv + 1);
+            if (str1.length() <= str2.length()) {
                 stringList.remove(lcv);
-           
+                lcv--; 
             } else {
                 stringList.remove(lcv + 1);
+                
             }
-           lcv--; 
+
 
         }
     }
@@ -151,15 +162,15 @@ public class PracticeITArrayList {
      * would change a1 to store [10, 6, 20, 7, 30, 8, 40, 50].
      */ 
     public static void interleave(ArrayList<Integer> list1, ArrayList<Integer> list2) {
-        int index1 = 0;
+        int index1 = 1;  
         for (int lcv = 0; lcv < list2.size(); lcv++) {
-            if (index1 < list1.size()) {
-                list1.add(index1, list2.get(lcv));
-                index1 += 2;
-            } else {
+             if (index1 <= list1.size()){
+            list1.add(index1, list2.get(lcv));
+             index1 += 2;
+             } else{
                 list1.add(list2.get(lcv));
-            }
-            
+                index1 +=1;
+             }
         }
     }
 }
